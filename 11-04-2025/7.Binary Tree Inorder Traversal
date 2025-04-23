@@ -1,0 +1,15 @@
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: List[int]
+        """
+        l=[]
+        def itr(root):
+            if root==None:return 
+            itr(root.left)
+            l.append(root.val)
+            itr(root.right)
+        itr(root)
+        return l   
+        
