@@ -1,0 +1,16 @@
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow, fast = head, head  # 🐢🐇 The hunt begins
+
+        while fast and fast.next:
+            slow = slow.next       # Calm stride 🍃
+            fast = fast.next.next  # Flash step ⚡
+
+            if slow == fast:
+                return True  # ⚔️ They crossed paths — the loop exists!
+
+        return False  # 🌅 The path ends in peace — no demons here.
