@@ -1,0 +1,40 @@
+class Solution(object):
+    def fractionToDecimal(self, numerator, denominator):
+        """
+        :type numerator: int
+        :type denominator: int
+        :rtype: str
+        """
+        string_decimal_output = ""
+
+        
+        if (numerator < 0) != (denominator < 0): #either one is negative means that the output is negative
+            if numerator != 0: 
+                string_decimal_output += "-"
+
+        numerator = abs(numerator)
+        denominator = abs(denominator)
+
+        quotient = numerator // denominator
+        remainder = numerator % denominator 
+        string_decimal_output += str(quotient)
+
+        if remainder == 0: #fully divided, done
+            return string_decimal_output
+
+        else: #remainder exists, not fully divisible yet
+            string_decimal_output += "."
+            remainders_to_position = {} # {4: 2.6}
+            while remainder != 0:
+                if remainder in remainders_to_position: #if this is a repeated remainder, add the brackets and finish the calculation
+                    current_pos = remainders_to_position[remainder]
+                    new_string_decimal_output = string_decimal_output[:current_pos] + "(" + string_decimal_output[current_pos:] + ")"
+                    return new_string_decimal_output 
+                else: 
+                    remainders_to_position[remainder] = len(string_decimal_output)
+                    remainder *= 10
+                    quotient = remainder // denominator
+                    remainder = remainder % denominator 
+                    string_decimal_output += str(quotient)
+        
+        return string_decimal_output 
