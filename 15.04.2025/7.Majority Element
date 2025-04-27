@@ -1,0 +1,15 @@
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # val_dict = {}
+        # for val in nums:
+        #     if val not in val_dict.keys():
+        #         val_dict[val] = 1
+        #     else:
+        #         val_dict[val] +=1
+        # return max(val_dict, key = val_dict.get)
+        nums.sort()
+        return nums[int(len(nums)/2)]
