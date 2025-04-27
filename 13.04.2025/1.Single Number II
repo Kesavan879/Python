@@ -1,0 +1,7 @@
+class Solution(object):
+    def singleNumber(self, nums):
+        for elements in nums:
+            if(nums.count(elements)==1):
+                print(elements)
+                return elements
+        
