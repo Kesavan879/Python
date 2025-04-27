@@ -1,0 +1,23 @@
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        # Hash the set of words
+        wordSet = set(wordDict)
+        # Keep track of where a valid word ends
+        possibleSplits = set()
+        # Loop through each character
+        for outer in range(len(s)):
+            for inner in range(outer, len(s) + 1):
+                # If the substring is a valid word that follows right after a previous word
+                # ends
+                if s[outer:inner] in wordSet and (outer in possibleSplits or outer == 0):
+                    possibleSplits.add(inner)
+        # If no splits were ever made
+        if len(possibleSplits) == 0:
+            return False
+        # Check if we reached the end
+        return max(possibleSplits) == len(s)
