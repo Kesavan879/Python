@@ -1,0 +1,62 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class BSTIterator(object):
+
+    # Time Complexity: O(n) -> iterating trhough all nodes in the worst case
+    # Space Complexity: O(h) -> only hold left subtree per node in the stack at all times
+
+    # This is a super simple problem that can be done in two ways. 
+    # THe first way is really easy, you just need to do inorder traversal, and store the nodes in a queue. Then, for hasNext(), you can just check to see if the length of queue is > 0 and for next() you can just pop the first value from the q. This is O(n) time and O(n) space. 
+    # However, there is another way to do it that uses only O(h) space. 
+    # We will do DFS with a stack and not recursion. 
+    # So, when initializing everything, initialize a stack = []. 
+    # Then, create a second function called PushAll, which will push all the left nodes into the stack. 
+    # while (root): self.stack.append(root), root = root.left. This is how DFS works. It goes to the left most value, and then backtracks. 
+    # When you initialize this stack and call pushAll(self.root), the self.stack will contain the left nodes, making it O(h) space. 
+    # Here is the interesting part. In the Next() function, you will pop the last element from the stack and return that value. But, for that popped value, we have to check to see if there is a right child. If there is a right child, then call self.pushAll(popped.right). This will add th right child along with all the left nodes for that and then backtrack. 
+    # We will basically do DFS with stack instead of inorder recursion and O(n) space. 
+
+    def __init__(self, root):
+        """
+        :type root: Optional[TreeNode]
+        """
+        self.root = root
+        self.stack = []
+        self.pushAll(self.root)
+    
+    def pushAll(self, root):
+
+        while root:
+            self.stack.append(root)
+            root = root.left
+        
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        if self.stack:
+            val = self.stack.pop()
+            curr = val.right
+            if curr:
+                self.pushAll(curr)
+            return val.val
+        
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return len(self.stack) > 0
+
+        
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
