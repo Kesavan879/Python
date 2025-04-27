@@ -1,0 +1,33 @@
+class Solution(object):
+    def maxProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        memo = {} #stores results
+        def dp(i, mode):
+            if i == 0: #Base case
+                return nums[i]
+            if(i, mode) in memo: #Return already calculated value
+                return memo[(i, mode)]
+
+            prevMax = dp(i-1, 'max')
+            prevMin = dp(i-1, 'min')
+
+            #Calculates min and max products
+            if mode == 'max':
+                result = max(nums[i], nums[i] * prevMax, nums[i] * prevMin)
+            else:
+                result = min(nums[i], nums[i] * prevMax, nums[i] * prevMin)
+
+            memo[(i, mode)] = result #Adds the value to memo
+            return result
+
+        maxProd = [] #Stores all max products
+        for i in range(len(nums)):
+            maxProd.append(dp(i, 'max'))
+
+        return max(maxProd) #Returns the highest product
+            
