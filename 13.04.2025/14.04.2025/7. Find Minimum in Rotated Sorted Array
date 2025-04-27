@@ -1,0 +1,20 @@
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Binary search to find pivot
+        left = 0
+        right = len(nums) - 1
+        # While we are still searching
+        while left <= right:
+            mid = (left + right) // 2
+            # Compare our middle value against the last element in the array
+            if nums[mid] > nums[len(nums) - 1]:
+                # If it's greater, than our smallest value must be in the right half
+                left = mid + 1
+            else:
+                # If it's less than, than our smallest value is in the left half
+                right = mid - 1
+        return nums[left]
