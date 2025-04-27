@@ -1,0 +1,28 @@
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: List[str]
+        """
+        result = []
+        
+        def backtrack(start, path):
+            # If we've reached the end of the string
+            if start == len(s):
+                result.append(" ".join(path))
+                return
+            
+            # Try all possible words that can start from current position
+            for end in range(len(s) + 1):
+                word = s[start:end]
+                if word in wordDict:
+                    # Add the current word to our path
+                    path.append(word)
+                    # Continue with the remaining part of the string
+                    backtrack(end, path)
+                    # Backtrack - remove the last word to try other possibilities
+                    path.pop()
+        
+        backtrack(0, [])
+        return result
