@@ -1,0 +1,4 @@
+class Solution(object):
+    def fib(self, n):
+        x = ((((1 + (5 ** 0.5)) / 2) ** n) - (((1 - (5 ** 0.5)) / 2) ** n)) / (5 ** 0.5)
+        return int(round(x))
