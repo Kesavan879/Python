@@ -1,0 +1,27 @@
+class Solution(object):
+    def convertToBase7(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        sign=True
+        if num in list(range(-6,7)):
+            return str(num)
+        if num<0:
+            sign=False
+            num=num*(-1)
+        
+        result=''
+        while num>=7:
+            kalan=num%7
+            result=str(kalan)+result
+            num//=7    
+            if num<7:
+                result=str(num)+result
+                
+        if not sign:
+            result='-'+result
+
+        return result
+        
+        
