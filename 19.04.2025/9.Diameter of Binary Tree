@@ -1,0 +1,10 @@
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        def find(root):
+            if not root:
+                return 0, 0 # max diameter, max depth
+            else:
+                dl, l = find(root.left)
+                dr, r = find(root.right)
+                return max(dl, dr, l+r), 1+max(l, r)
+        return find(root)[0]
