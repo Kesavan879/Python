@@ -1,0 +1,13 @@
+class Solution(object):
+    def uniqueMorseRepresentations(self, words):
+        words2 = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+
+        result = set()
+        for i in range(len(words)):
+            s = ''
+            for num in words[i]:
+                s += words2[ord(num)-97]
+
+            result.add(s)
+        
+        return len(result)
