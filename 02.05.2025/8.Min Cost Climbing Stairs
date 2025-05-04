@@ -1,0 +1,11 @@
+
+class Solution(object):
+    def minCostClimbingStairs(self, cost):
+        def helper(idx):
+            if idx >= len(cost):
+                return 0
+            step1 = cost[idx] + helper(idx + 1)
+            step2 = cost[idx] + helper(idx + 2)
+            return min(step1, step2)
+
+        return min(helper(0), helper(1))
