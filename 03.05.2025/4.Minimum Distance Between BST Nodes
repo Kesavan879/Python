@@ -1,0 +1,24 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def __init__(self):
+        self.prev=None 
+        self.minval=float('inf')
+    def makediffwithallnodes(self,root):
+        if root is None:
+            return
+        self.makediffwithallnodes(root.left)
+        if self.prev!=None:
+            self.minval=min(self.minval,abs(root.val-self.prev))
+        self.prev=root.val
+        self.makediffwithallnodes(root.right)
+    def minDiffInBST(self,root):
+        self.makediffwithallnodes(root)
+        return self.minval
+            
+
+       
